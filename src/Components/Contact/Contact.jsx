@@ -17,47 +17,23 @@ import "./contact.css";
 
 const Contact = () => {
   const form = useRef();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
   const [isSending, setIsSending] = useState(false);
   const [sendStatus, setSendStatus] = useState({ success: false, message: "" });
 
   useEffect(() => {
-    // Initialize EmailJS with your public key
-    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual public key
+    emailjs.init("4QcufM_4cy-ugl3yG"); // Replace with your EmailJS public key
   }, []);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSending(true);
     setSendStatus({ success: false, message: "" });
 
-    // Prepare template parameters
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-      to_name: "Michel MUNEZERO",
-      reply_to: formData.email,
-    };
-
     emailjs
-      .send(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        templateParams
+      .sendForm(
+        "service_7krprop", // Replace with your EmailJS service ID
+        "template_24vu669", // Replace with your EmailJS template ID
+        form.current
       )
       .then(
         (result) => {
@@ -66,12 +42,7 @@ const Contact = () => {
             success: true,
             message: "Message sent successfully! I'll get back to you soon.",
           });
-          setFormData({
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-          });
+          e.target.reset();
         },
         (error) => {
           console.log(error.text);
@@ -128,7 +99,7 @@ const Contact = () => {
                 <FontAwesomeIcon icon={faGithub} />
               </a>
               <a
-                href="https://www.linkedin.com/in/your-linkedin"
+                href="https://www.linkedin.com/in/michel-munezero-25b0a1234/"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="LinkedIn"
@@ -136,7 +107,7 @@ const Contact = () => {
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
               <a
-                href="https://twitter.com/your-twitter"
+                href="https://x.com/lehcimunna"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="X (Twitter)"
@@ -152,7 +123,7 @@ const Contact = () => {
                 <FontAwesomeIcon icon={faUpwork} />
               </a>
               <a
-                href="https://platform.utest.com/account/my-profile/"
+                href="https://www.utest.com/profile/m.michel/about"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="uTest"
@@ -162,24 +133,15 @@ const Contact = () => {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form" onSubmit={handleSubmit} ref={form}>
             <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
+              <input type="text" name="name" placeholder="Your Name" required />
             </div>
             <div className="form-group">
               <input
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
                 required
               />
             </div>
@@ -188,8 +150,6 @@ const Contact = () => {
                 type="text"
                 name="subject"
                 placeholder="Subject"
-                value={formData.subject}
-                onChange={handleChange}
                 required
               />
             </div>
@@ -197,8 +157,6 @@ const Contact = () => {
               <textarea
                 name="message"
                 placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
                 required
               ></textarea>
             </div>
