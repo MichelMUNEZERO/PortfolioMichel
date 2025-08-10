@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PortfolioMichel/static/css/main.b31f528e.css",
+    "main.js": "/PortfolioMichel/static/js/main.54afe985.js",
+    "index.html": "/PortfolioMichel/index.html",
+    "main.b31f528e.css.map": "/PortfolioMichel/static/css/main.b31f528e.css.map",
+    "main.54afe985.js.map": "/PortfolioMichel/static/js/main.54afe985.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b31f528e.css",
+    "static/js/main.54afe985.js"
+  ]
+}
